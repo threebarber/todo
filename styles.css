@@ -1,0 +1,45 @@
+.container {  display: grid;
+    grid-template-columns: 0.4fr 1.6fr;
+    grid-template-rows: 0.1fr 1.9fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "titleGridArea ."
+      "sidebarGridArea mainGridArea";
+  }
+  
+  .titleGridArea { 
+    
+    grid-area: titleGridArea; 
+
+}
+  
+  .sidebarGridArea { 
+    
+    grid-area: sidebarGridArea; 
+
+    border:dashed green;
+}
+  
+  .mainGridArea { 
+    
+    grid-area: mainGridArea; 
+
+    border:dashed green;
+    }
+  
+
+
+  html, body{
+     margin:0;
+     padding:0;
+  }
+
+* {
+    /* Font-family: Gill Sans, Gill Sans MT, Calibri, sans-serif;*/
+    font-family: 'Helvetica', sans-serif;
+    color:#191913;
+    box-sizing: border-box;
+    letter-spacing: 0em;
+
+  }
