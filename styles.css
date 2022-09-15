@@ -1,7 +1,7 @@
 .container {  display: grid;
     grid-template-columns: 0.4fr 1.6fr;
     grid-template-rows: 0.1fr 1.9fr;
-    gap: 0px 0px;
+    gap: 0px 20px;
     grid-auto-flow: row;
     grid-template-areas:
       "titleGridArea ."
@@ -12,6 +12,10 @@
     
     grid-area: titleGridArea; 
 
+}
+
+.titleGridArea h2{
+    padding-left: 10vw;
 }
   
   .sidebarGridArea { 
