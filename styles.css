@@ -32,11 +32,30 @@
     border:dashed green;
     }
   
+ .projectsContainer {
+    display:flex;
+    margin:30px;
+    flex-direction: column;
+
+ }
+
+ .projectDiv {
+    display:flex;
+    border:dashed green;
+    margin:10px;
+ }
 
 
-  html, body{
-     margin:0;
-     padding:0;
+ .toDoDiv {
+
+ }
+
+
+  html{
+    margin-top:10vh;
+    margin-bottom: 10vh;
+    margin-left: 10vw;
+    margin-right:10vw;
   }
 
 * {
