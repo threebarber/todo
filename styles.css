@@ -34,19 +34,26 @@
   
  .projectsContainer {
     display:flex;
+    flex-wrap: wrap;
     margin:30px;
-    flex-direction: column;
-
  }
 
  .projectDiv {
     display:flex;
+    flex-direction: column;
     border:dashed green;
     margin:10px;
  }
 
 
- .toDoDiv {
+ .taskContainer {
+    display:flex;
+    flex-direction: column;
+    border:dashed lightgreen;
+ }
+
+
+ .taskDiv{
 
  }
 
