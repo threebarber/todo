@@ -98,8 +98,15 @@ const utils = (() => {
 
     }
 
+    const addButtonClicked = function () {
+        
+    }
+
+
+
     return {
 
+        addButtonClicked,
         log,
         displayProjects,
         createTaskDiv,

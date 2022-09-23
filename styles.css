@@ -39,6 +39,7 @@
 
 .createTaskFormDiv {
     display:flex;
+    gap:8px;
     align-items: center;
     flex-direction: column;
     border:dashed green;
