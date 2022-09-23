@@ -3,14 +3,12 @@ const date = new Date();
 const projectList = [];
 const projContainer = document.querySelector(".projectsContainer");
 
-const task = function (title, description,dueDate, priority, project = "example", notes = "n/a") {
+const task = function (title, description,dueDate, priority, project = "example") {
 
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
-    this.notes = notes;
-
 
     utils.log(`Created task title: ${this.title}`);
 

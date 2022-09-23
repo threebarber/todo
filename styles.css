@@ -6,12 +6,23 @@
     grid-template-areas:
       "titleGridArea ."
       "sidebarGridArea mainGridArea";
+
+
+      border:white dashed 5px;
+      border-radius: 10px;
   }
   
   .titleGridArea { 
     
     grid-area: titleGridArea; 
+    background-color: purple;
 
+}
+
+
+.headerDiv {
+    background-color: purple;
+    display:flex;
 }
 
 .titleGridArea h2{
@@ -23,6 +34,19 @@
     grid-area: sidebarGridArea; 
 
     border:dashed green;
+}
+
+
+.createTaskFormDiv {
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+    border:dashed green;
+}
+
+.createTaskFormDiv input, label, textarea, button, select{
+    font-size:medium;
+
 }
   
   .mainGridArea { 
@@ -57,18 +81,24 @@
 
  }
 
+ 
+.fa-check {
+    color:white;
+}
+
 
   html{
-    margin-top:10vh;
+
     margin-bottom: 10vh;
     margin-left: 10vw;
     margin-right:10vw;
+    background-color: purple;
   }
 
 * {
     /* Font-family: Gill Sans, Gill Sans MT, Calibri, sans-serif;*/
     font-family: 'Helvetica', sans-serif;
-    color:#191913;
+    color:black;
     box-sizing: border-box;
     letter-spacing: 0em;
 
