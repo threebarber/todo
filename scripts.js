@@ -3,6 +3,11 @@ const date = new Date();
 const projectList = [];
 const projContainer = document.querySelector(".projectsContainer");
 
+
+document.querySelector("#addButton").addEventListener('click', function () {
+    utils.addButtonClicked();
+})
+
 const task = function (title, description,dueDate, priority, project = "example") {
 
     this.title = title;
@@ -98,9 +103,24 @@ const utils = (() => {
 
     }
 
+
+
     const addButtonClicked = function () {
-        
-    }
+
+        let taskName = document.querySelector("#taskNameInput").value;
+        let projectName = document.querySelector("#projectInput").value;
+        let taskDescription = document.querySelector("#taskDescriptionInput").value;
+        let taskDate = document.querySelector("#taskDescriptionInput").value;
+        let taskPriority = document.querySelector("#taskPriorityInput").value;
+
+
+        if (projectList.find(p => p.title === 'example') != undefined){
+            utils.log(`project ${projectName} already exists, adding task to selected project`);
+        }else{
+            utils.log(`creating new project: ${projectName}`);
+        }
+
+    }   
 
 
 
