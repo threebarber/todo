@@ -14,6 +14,7 @@ const task = function (title, description,dueDate, priority, project = "example"
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
+    this.project = project;
 
     utils.log(`Created task title: ${this.title}`);
 
@@ -22,7 +23,7 @@ const task = function (title, description,dueDate, priority, project = "example"
 
 const project = function(title, toDoList,){
     
-    this.title = title;
+    this.title = title.toLowerCase();
     this.toDoList = toDoList;
 
     this.addToList = function(){
@@ -44,10 +45,12 @@ const utils = (() => {
 
 
 
-    const createTaskDiv = function (taskList){
+    const createTaskDiv = function (project, taskList){
        
         var taskContainer = document.createElement("div");
         taskContainer.classList.add("taskContainer");
+        taskContainer.setAttribute("id",`${project.title}-taskDiv`);
+
        
         taskList.forEach(task => {
 
@@ -72,6 +75,26 @@ const utils = (() => {
     }
 
 
+    const createSingleTaskDiv = function (task) {
+
+            var taskDiv = document.createElement("div");
+            taskDiv.classList.add("taskDiv");
+
+            var taskName = document.createElement("h4");
+            taskName.innerText = task.title;
+
+            var taskDescription = document.createElement("p");
+            taskDescription.innerText = task.description;
+
+
+            taskDiv.appendChild(taskName);
+            taskDiv.appendChild(taskDescription);
+
+            return taskDiv;
+
+    }
+
+
     const displayProjects = function (projectList) {
 
         /*projContainer.innerHTML = "";*/
@@ -83,6 +106,7 @@ const utils = (() => {
 
             var projectDiv = document.createElement("div");
             projectDiv.classList.add("projectDiv");
+            projectDiv.setAttribute("id",`${project.title}-projectDiv`);
 
 
             var projName = document.createElement("h2");
@@ -92,7 +116,7 @@ const utils = (() => {
             projectDiv.appendChild(projName);
 
 
-            var taskContainer = utils.createTaskDiv(project.toDoList);
+            var taskContainer = utils.createTaskDiv(project,project.toDoList);
 
             projectDiv.appendChild(taskContainer);
 
@@ -108,14 +132,16 @@ const utils = (() => {
     const addButtonClicked = function () {
 
         let taskName = document.querySelector("#taskNameInput").value;
-        let projectName = document.querySelector("#projectInput").value;
+        let projectName = document.querySelector("#projectInput").value.toLowerCase();
         let taskDescription = document.querySelector("#taskDescriptionInput").value;
         let taskDate = document.querySelector("#taskDescriptionInput").value;
         let taskPriority = document.querySelector("#taskPriorityInput").value;
 
+        const newTask = new task(taskName,taskDescription,taskDate,taskPriority,projectName);
 
-        if (projectList.find(p => p.title === 'example') != undefined){
+        if (projectList.find(p => p.title === projectName) != undefined){
             utils.log(`project ${projectName} already exists, adding task to selected project`);
+            utils.addTaskToProject(newTask);
         }else{
             utils.log(`creating new project: ${projectName}`);
         }
@@ -124,8 +150,28 @@ const utils = (() => {
 
 
 
+
+    const addTaskToProject = function (newTask) {
+
+        projectList.find(p => p.title == newTask.project).toDoList.push(newTask);
+
+       let project = projectList.find(p => p.title == newTask.project);
+
+
+       let existingTaskContainer = document.querySelector(`#${project.title}-taskDiv`);
+
+       let newTaskDiv = utils.createSingleTaskDiv(newTask);
+
+        existingTaskContainer.appendChild(newTaskDiv);
+
+    }
+
+
+
     return {
 
+        createSingleTaskDiv,
+        addTaskToProject,
         addButtonClicked,
         log,
         displayProjects,
@@ -135,9 +181,9 @@ const utils = (() => {
 })();
 
 
-exampleTask = new task("take out trash", "make sure trash is taken out","9-20-22","low","example","notes: it is really smelly right now");
-exampleTaskTwo = new task("take out trash #2", "make sure trash is taken out","9-20-22","low","example","notes: it is really smelly right now");
-exampleTaskThree = new task("take out trash #3", "make sure trash is taken out","9-20-22","low","example","notes: it is really smelly right now");
+const exampleTask = new task("take out trash", "make sure trash is taken out","9-20-22","low","example","notes: it is really smelly right now");
+const exampleTaskTwo = new task("take out trash #2", "make sure trash is taken out","9-20-22","low","example","notes: it is really smelly right now");
+const exampleTaskThree = new task("take out trash #3", "make sure trash is taken out","9-20-22","low","example","notes: it is really smelly right now");
 
 exampleTaskList = [];
 
