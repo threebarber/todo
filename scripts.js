@@ -37,8 +37,6 @@ const project = function(title, toDoList,){
 };
 
 
-
-
 const utils = (() => {
 
     const log = (msg) => console.log(`${date.toLocaleTimeString()} - ${msg}`);
@@ -125,6 +123,37 @@ const utils = (() => {
 
         });
 
+    }   
+
+
+    const displaySingleProject = function (project) {
+
+        /*projContainer.innerHTML = "";*/
+
+
+            utils.log(`Displaying project ${project.title}`);
+
+            var projectDiv = document.createElement("div");
+            projectDiv.classList.add("projectDiv");
+            projectDiv.setAttribute("id",`${project.title}-projectDiv`);
+
+
+            var projName = document.createElement("h2");
+            projName.innerText = project.title;
+            
+
+            projectDiv.appendChild(projName);
+
+
+            var taskContainer = utils.createTaskDiv(project,project.toDoList);
+
+            projectDiv.appendChild(taskContainer);
+
+
+            projContainer.appendChild(projectDiv);
+
+            
+
     }
 
 
@@ -144,6 +173,7 @@ const utils = (() => {
             utils.addTaskToProject(newTask);
         }else{
             utils.log(`creating new project: ${projectName}`);
+            addNewProject(newTask);
         }
 
     }   
@@ -167,9 +197,28 @@ const utils = (() => {
     }
 
 
+    const addNewProject = function (newTask) {
+
+        newTodoList = [];
+
+        newTodoList.push(newTask);
+
+        newProj = new project(newTask.project,newTodoList);
+
+        projectList.push(newProj);
+
+        utils.log(`created new project ${newProj.title}`);
+
+
+        displaySingleProject(newProj);
+    }
+
+
 
     return {
 
+        displaySingleProject,
+        addNewProject,
         createSingleTaskDiv,
         addTaskToProject,
         addButtonClicked,
