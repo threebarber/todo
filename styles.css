@@ -40,7 +40,6 @@
     gap:8px;
     align-items: center;
     flex-direction: column;
-    border:dashed green;
 }
 
 .createTaskFormDiv input, label, textarea, button, select{
@@ -64,8 +63,14 @@
  .projectDiv {
     display:flex;
     flex-direction: column;
-    border:dashed green;
+    border:solid #d9d9d9;
+    border-radius: 10px;
     margin:10px;
+    min-width: 12vw;
+ }
+
+ .projectDiv h2{
+    text-align: center;
  }
 
 
