@@ -15,13 +15,11 @@
   .titleGridArea { 
     
     grid-area: titleGridArea; 
-    background-color: purple;
 
 }
 
 
 .headerDiv {
-    background-color: purple;
     display:flex;
 }
 
@@ -31,7 +29,7 @@
   
   .sidebarGridArea { 
     
-    grid-area: sidebarGridArea; 
+    grid-area: sidebarGridArea;     
 
     border:dashed green;
 }
@@ -84,8 +82,21 @@
 
  
 .fa-check {
-    color:white;
+    color:#d9d9d9;
 }
+
+.pri-low {
+    color: green
+}
+
+.pri-normal {
+    color:orange;
+}
+
+.pri-high {
+    color:red;
+}
+
 
 
   html{
@@ -93,7 +104,7 @@
     margin-bottom: 10vh;
     margin-left: 10vw;
     margin-right:10vw;
-    background-color: purple;
+    background-color: #f2f2f2;
   }
 
 * {

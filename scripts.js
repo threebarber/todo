@@ -61,9 +61,14 @@ const utils = (() => {
             var taskDescription = document.createElement("p");
             taskDescription.innerText = task.description;
 
+            var taskDuePriority = document.createElement("p");
+            taskDuePriority.classList.add(`pri-${task.priority}`);
+            taskDuePriority.innerText = `${task.dueDate} | ${task.priority}`;
+
 
             taskDiv.appendChild(taskName);
             taskDiv.appendChild(taskDescription);
+            taskDiv.appendChild(taskDuePriority);
 
             taskContainer.appendChild(taskDiv);
         });
@@ -84,9 +89,15 @@ const utils = (() => {
             var taskDescription = document.createElement("p");
             taskDescription.innerText = task.description;
 
+            var taskDuePriority = document.createElement("p");
+            taskDuePriority.classList.add(`pri-${task.priority}`);
+            taskDuePriority.innerText = `${task.dueDate} | ${task.priority}`;
+
 
             taskDiv.appendChild(taskName);
             taskDiv.appendChild(taskDescription);
+            taskDiv.appendChild(taskDuePriority);
+
 
             return taskDiv;
 
@@ -163,7 +174,7 @@ const utils = (() => {
         let taskName = document.querySelector("#taskNameInput").value;
         let projectName = document.querySelector("#projectInput").value.toLowerCase();
         let taskDescription = document.querySelector("#taskDescriptionInput").value;
-        let taskDate = document.querySelector("#taskDescriptionInput").value;
+        let taskDate = document.querySelector("#taskDateInput").value;
         let taskPriority = document.querySelector("#taskPriorityInput").value;
 
         const newTask = new task(taskName,taskDescription,taskDate,taskPriority,projectName);
