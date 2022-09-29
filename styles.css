@@ -89,8 +89,7 @@
 }
 
  .taskDiv{
-
- }
+}
 
  
 
@@ -104,6 +103,10 @@
 
 .pri-high {
     color:red;
+}
+
+.completed {
+    text-decoration: line-through;
 }
 
 
