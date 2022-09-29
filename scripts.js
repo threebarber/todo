@@ -65,6 +65,7 @@ const utils = (() => {
   const createSingleTaskDiv = function (task) {
     var taskDiv = document.createElement("div");
     taskDiv.classList.add("taskDiv");
+    taskDiv.setAttribute("id",task.taskID);
 
     var taskIconDiv = document.createElement("div");
     taskIconDiv.classList.add("taskIconDiv");
@@ -89,6 +90,10 @@ const utils = (() => {
       );
     });
 
+    var taskEditIcon = document.createElement("i");
+    taskEditIcon.classList.add("fa");
+    taskEditIcon.classList.add("fa-pen");
+
     var taskDelIcon = document.createElement("i");
     taskDelIcon.classList.add("fa");
     taskDelIcon.classList.add("fa-bomb");
@@ -110,6 +115,7 @@ const utils = (() => {
     /* ICONS */
     taskIconDiv.appendChild(taskCheckIcon);
     taskIconDiv.appendChild(taskUndoIcon);
+    taskIconDiv.appendChild(taskEditIcon);
     taskIconDiv.appendChild(taskDelIcon);
 
     taskDiv.appendChild(taskIconDiv);
