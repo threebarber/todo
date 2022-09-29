@@ -1,249 +1,260 @@
-
 const date = new Date();
 const projectList = [];
 const projContainer = document.querySelector(".projectsContainer");
 
+document.querySelector("#addButton").addEventListener("click", function () {
+  utils.addButtonClicked();
+});
 
-document.querySelector("#addButton").addEventListener('click', function () {
-    utils.addButtonClicked();
-})
+const task = function (
+  title,
+  description,
+  dueDate,
+  priority,
+  project = "example"
+) {
+  this.title = title;
+  this.description = description;
+  this.dueDate = dueDate;
+  this.priority = priority;
+  this.project = project;
 
-const task = function (title, description,dueDate, priority, project = "example") {
-
-    this.title = title;
-    this.description = description;
-    this.dueDate = dueDate;
-    this.priority = priority;
-    this.project = project;
-
-    utils.log(`Created task title: ${this.title}`);
-
+  utils.log(`Created task title: ${this.title}`);
 };
 
+const project = function (title, toDoList) {
+  this.title = title.toLowerCase();
+  this.toDoList = toDoList;
 
-const project = function(title, toDoList,){
-    
-    this.title = title.toLowerCase();
-    this.toDoList = toDoList;
+  this.addToList = function () {
+    projectList.push(this);
+  };
 
-    this.addToList = function(){
-
-        projectList.push(this);
-    }
-
-
-    utils.log(`Created project: ${this.title}`);
-
+  utils.log(`Created project: ${this.title}`);
 };
-
 
 const utils = (() => {
+  const log = (msg) => console.log(`${date.toLocaleTimeString()} - ${msg}`);
 
-    const log = (msg) => console.log(`${date.toLocaleTimeString()} - ${msg}`);
+  const createTaskDiv = function (project, taskList) {
+    var taskContainer = document.createElement("div");
+    taskContainer.classList.add("taskContainer");
+    taskContainer.setAttribute("id", `${project.title}-taskDiv`);
 
+    taskList.forEach((task) => {
+      var taskDiv = document.createElement("div");
+      taskDiv.classList.add("taskDiv");
 
+      var taskIconDiv = document.createElement("div");
+      taskIconDiv.classList.add("taskIconDiv");
 
-    const createTaskDiv = function (project, taskList){
-       
-        var taskContainer = document.createElement("div");
-        taskContainer.classList.add("taskContainer");
-        taskContainer.setAttribute("id",`${project.title}-taskDiv`);
+      var taskCheckIcon = document.createElement("i");
+      taskCheckIcon.classList.add("fa");
+      taskCheckIcon.classList.add("fa-check");
 
-       
-        taskList.forEach(task => {
+      var taskDelIcon = document.createElement("i");
+      taskDelIcon.classList.add("fa");
+      taskDelIcon.classList.add("fa-bomb");
 
-            var taskDiv = document.createElement("div");
-            taskDiv.classList.add("taskDiv");
+      var taskName = document.createElement("h4");
+      taskName.innerText = task.title;
 
-            var taskName = document.createElement("h4");
-            taskName.innerText = task.title;
+      var taskDescription = document.createElement("p");
+      taskDescription.innerText = task.description;
 
-            var taskDescription = document.createElement("p");
-            taskDescription.innerText = task.description;
+      var taskDuePriority = document.createElement("p");
+      taskDuePriority.classList.add(`pri-${task.priority}`);
+      taskDuePriority.innerText = `${task.dueDate} | ${task.priority}`;
 
-            var taskDuePriority = document.createElement("p");
-            taskDuePriority.classList.add(`pri-${task.priority}`);
-            taskDuePriority.innerText = `${task.dueDate} | ${task.priority}`;
+      /* ICONS */
+      taskIconDiv.appendChild(taskCheckIcon);
+      taskIconDiv.appendChild(taskDelIcon);
 
+      taskDiv.appendChild(taskIconDiv);
+      taskDiv.appendChild(taskName);
+      taskDiv.appendChild(taskDescription);
+      taskDiv.appendChild(taskDuePriority);
 
-            taskDiv.appendChild(taskName);
-            taskDiv.appendChild(taskDescription);
-            taskDiv.appendChild(taskDuePriority);
+      taskContainer.appendChild(taskDiv);
+    });
 
-            taskContainer.appendChild(taskDiv);
-        });
+    return taskContainer;
+  };
 
+  const createSingleTaskDiv = function (task) {
+    var taskDiv = document.createElement("div");
+    taskDiv.classList.add("taskDiv");
 
-        return taskContainer;
+    var taskIconDiv = document.createElement("div");
+    taskIconDiv.classList.add("taskIconDiv");
+
+    var taskCheckIcon = document.createElement("i");
+    taskCheckIcon.classList.add("fa");
+    taskCheckIcon.classList.add("fa-check");
+
+    var taskDelIcon = document.createElement("i");
+    taskDelIcon.classList.add("fa");
+    taskDelIcon.classList.add("fa-bomb");
+
+    var taskName = document.createElement("h4");
+    taskName.innerText = task.title;
+
+    var taskDescription = document.createElement("p");
+    taskDescription.innerText = task.description;
+
+    var taskDuePriority = document.createElement("p");
+    taskDuePriority.classList.add(`pri-${task.priority}`);
+    taskDuePriority.innerText = `${task.dueDate} | ${task.priority}`;
+
+    /* ICONS */
+    taskIconDiv.appendChild(taskCheckIcon);
+    taskIconDiv.appendChild(taskDelIcon);
+
+    taskDiv.appendChild(taskIconDiv);
+
+    taskDiv.appendChild(taskName);
+    taskDiv.appendChild(taskDescription);
+    taskDiv.appendChild(taskDuePriority);
+
+    return taskDiv;
+  };
+
+  const displayProjects = function (projectList) {
+    /*projContainer.innerHTML = "";*/
+
+    projectList.forEach((project) => {
+      utils.log(`Displaying project ${project.title}`);
+
+      var projectDiv = document.createElement("div");
+      projectDiv.classList.add("projectDiv");
+      projectDiv.setAttribute("id", `${project.title}-projectDiv`);
+
+      var projName = document.createElement("h2");
+      projName.innerText = project.title;
+
+      projectDiv.appendChild(projName);
+
+      var taskContainer = utils.createTaskDiv(project, project.toDoList);
+
+      projectDiv.appendChild(taskContainer);
+
+      projContainer.appendChild(projectDiv);
+    });
+  };
+
+  const displaySingleProject = function (project) {
+    /*projContainer.innerHTML = "";*/
+
+    utils.log(`Displaying project ${project.title}`);
+
+    var projectDiv = document.createElement("div");
+    projectDiv.classList.add("projectDiv");
+    projectDiv.setAttribute("id", `${project.title}-projectDiv`);
+
+    var projName = document.createElement("h2");
+    projName.innerText = project.title;
+
+    projectDiv.appendChild(projName);
+
+    var taskContainer = utils.createTaskDiv(project, project.toDoList);
+
+    projectDiv.appendChild(taskContainer);
+
+    projContainer.appendChild(projectDiv);
+  };
+
+  const addButtonClicked = function () {
+    let taskName = document.querySelector("#taskNameInput").value;
+    let projectName = document
+      .querySelector("#projectInput")
+      .value.toLowerCase();
+    let taskDescription = document.querySelector("#taskDescriptionInput").value;
+    let taskDate = document.querySelector("#taskDateInput").value;
+    let taskPriority = document.querySelector("#taskPriorityInput").value;
+
+    const newTask = new task(
+      taskName,
+      taskDescription,
+      taskDate,
+      taskPriority,
+      projectName
+    );
+
+    if (projectList.find((p) => p.title === projectName) != undefined) {
+      utils.log(
+        `project ${projectName} already exists, adding task to selected project`
+      );
+      utils.addTaskToProject(newTask);
+    } else {
+      utils.log(`creating new project: ${projectName}`);
+      addNewProject(newTask);
     }
+  };
 
+  const addTaskToProject = function (newTask) {
+    projectList.find((p) => p.title == newTask.project).toDoList.push(newTask);
 
-    const createSingleTaskDiv = function (task) {
+    let project = projectList.find((p) => p.title == newTask.project);
 
-            var taskDiv = document.createElement("div");
-            taskDiv.classList.add("taskDiv");
+    let existingTaskContainer = document.querySelector(
+      `#${project.title}-taskDiv`
+    );
 
-            var taskName = document.createElement("h4");
-            taskName.innerText = task.title;
+    let newTaskDiv = utils.createSingleTaskDiv(newTask);
 
-            var taskDescription = document.createElement("p");
-            taskDescription.innerText = task.description;
+    existingTaskContainer.appendChild(newTaskDiv);
+  };
 
-            var taskDuePriority = document.createElement("p");
-            taskDuePriority.classList.add(`pri-${task.priority}`);
-            taskDuePriority.innerText = `${task.dueDate} | ${task.priority}`;
+  const addNewProject = function (newTask) {
+    newTodoList = [];
 
+    newTodoList.push(newTask);
 
-            taskDiv.appendChild(taskName);
-            taskDiv.appendChild(taskDescription);
-            taskDiv.appendChild(taskDuePriority);
+    newProj = new project(newTask.project, newTodoList);
 
+    projectList.push(newProj);
 
-            return taskDiv;
+    utils.log(`created new project ${newProj.title}`);
 
-    }
+    displaySingleProject(newProj);
+  };
 
-
-    const displayProjects = function (projectList) {
-
-        /*projContainer.innerHTML = "";*/
-
-
-        projectList.forEach(project => {
-            
-            utils.log(`Displaying project ${project.title}`);
-
-            var projectDiv = document.createElement("div");
-            projectDiv.classList.add("projectDiv");
-            projectDiv.setAttribute("id",`${project.title}-projectDiv`);
-
-
-            var projName = document.createElement("h2");
-            projName.innerText = project.title;
-            
-
-            projectDiv.appendChild(projName);
-
-
-            var taskContainer = utils.createTaskDiv(project,project.toDoList);
-
-            projectDiv.appendChild(taskContainer);
-
-
-            projContainer.appendChild(projectDiv);
-
-        });
-
-    }   
-
-
-    const displaySingleProject = function (project) {
-
-        /*projContainer.innerHTML = "";*/
-
-
-            utils.log(`Displaying project ${project.title}`);
-
-            var projectDiv = document.createElement("div");
-            projectDiv.classList.add("projectDiv");
-            projectDiv.setAttribute("id",`${project.title}-projectDiv`);
-
-
-            var projName = document.createElement("h2");
-            projName.innerText = project.title;
-            
-
-            projectDiv.appendChild(projName);
-
-
-            var taskContainer = utils.createTaskDiv(project,project.toDoList);
-
-            projectDiv.appendChild(taskContainer);
-
-
-            projContainer.appendChild(projectDiv);
-
-            
-
-    }
-
-
-
-    const addButtonClicked = function () {
-
-        let taskName = document.querySelector("#taskNameInput").value;
-        let projectName = document.querySelector("#projectInput").value.toLowerCase();
-        let taskDescription = document.querySelector("#taskDescriptionInput").value;
-        let taskDate = document.querySelector("#taskDateInput").value;
-        let taskPriority = document.querySelector("#taskPriorityInput").value;
-
-        const newTask = new task(taskName,taskDescription,taskDate,taskPriority,projectName);
-
-        if (projectList.find(p => p.title === projectName) != undefined){
-            utils.log(`project ${projectName} already exists, adding task to selected project`);
-            utils.addTaskToProject(newTask);
-        }else{
-            utils.log(`creating new project: ${projectName}`);
-            addNewProject(newTask);
-        }
-
-    }   
-
-
-
-
-    const addTaskToProject = function (newTask) {
-
-        projectList.find(p => p.title == newTask.project).toDoList.push(newTask);
-
-       let project = projectList.find(p => p.title == newTask.project);
-
-
-       let existingTaskContainer = document.querySelector(`#${project.title}-taskDiv`);
-
-       let newTaskDiv = utils.createSingleTaskDiv(newTask);
-
-        existingTaskContainer.appendChild(newTaskDiv);
-
-    }
-
-
-    const addNewProject = function (newTask) {
-
-        newTodoList = [];
-
-        newTodoList.push(newTask);
-
-        newProj = new project(newTask.project,newTodoList);
-
-        projectList.push(newProj);
-
-        utils.log(`created new project ${newProj.title}`);
-
-
-        displaySingleProject(newProj);
-    }
-
-
-
-    return {
-
-        displaySingleProject,
-        addNewProject,
-        createSingleTaskDiv,
-        addTaskToProject,
-        addButtonClicked,
-        log,
-        displayProjects,
-        createTaskDiv,
-    };
-
+  return {
+    displaySingleProject,
+    addNewProject,
+    createSingleTaskDiv,
+    addTaskToProject,
+    addButtonClicked,
+    log,
+    displayProjects,
+    createTaskDiv,
+  };
 })();
 
-
-const exampleTask = new task("take out trash", "make sure trash is taken out","9-20-22","low","example","notes: it is really smelly right now");
-const exampleTaskTwo = new task("take out trash #2", "make sure trash is taken out","9-20-22","low","example","notes: it is really smelly right now");
-const exampleTaskThree = new task("take out trash #3", "make sure trash is taken out","9-20-22","low","example","notes: it is really smelly right now");
+const exampleTask = new task(
+  "take out trash",
+  "make sure trash is taken out",
+  "9-20-22",
+  "low",
+  "example",
+  "notes: it is really smelly right now"
+);
+const exampleTaskTwo = new task(
+  "take out trash #2",
+  "make sure trash is taken out",
+  "9-20-22",
+  "low",
+  "example",
+  "notes: it is really smelly right now"
+);
+const exampleTaskThree = new task(
+  "take out trash #3",
+  "make sure trash is taken out",
+  "9-20-22",
+  "low",
+  "example",
+  "notes: it is really smelly right now"
+);
 
 exampleTaskList = [];
 
@@ -251,25 +262,8 @@ exampleTaskList.push(exampleTask);
 exampleTaskList.push(exampleTaskTwo);
 exampleTaskList.push(exampleTaskThree);
 
-
-
-exampleProj = new project("example",exampleTaskList);
+exampleProj = new project("example", exampleTaskList);
 
 projectList.push(exampleProj);
 
 utils.displayProjects(projectList);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
