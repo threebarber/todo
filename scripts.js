@@ -11,88 +11,50 @@ const task = function (
   description,
   dueDate,
   priority,
-  project = "example"
+  project = "example",
+  taskID = ""
 ) {
   this.title = title;
   this.description = description;
   this.dueDate = dueDate;
   this.priority = priority;
   this.project = project;
+  this.taskID = this.taskID;
 
-  utils.log(`Created task title: ${this.title}`);
+  this.taskID = utils.randstr("task-");
+
+  utils.log(`Created task title: ${this.title} ID: ${this.taskID}`);
 };
 
-const project = function (title, toDoList) {
+const project = function (title, toDoList, projectID = "") {
   this.title = title.toLowerCase();
   this.toDoList = toDoList;
+  this.projectID = projectID;
 
   this.addToList = function () {
     projectList.push(this);
   };
 
-  utils.log(`Created project: ${this.title}`);
+  this.projectID = utils.randstr("project-");
+  utils.log(`Created project: ${this.title} ID: ${this.projectID}`);
 };
 
 const utils = (() => {
   const log = (msg) => console.log(`${date.toLocaleTimeString()} - ${msg}`);
 
-  const createTaskDiv = function (project, taskList) {
+  const randstr = function (prefix) {
+    return Math.random()
+      .toString(36)
+      .replace("0.", prefix || "");
+  };
+
+  const createTaskContainer = function (project, taskList) {
     var taskContainer = document.createElement("div");
     taskContainer.classList.add("taskContainer");
     taskContainer.setAttribute("id", `${project.title}-taskDiv`);
 
     taskList.forEach((task) => {
-      var taskDiv = document.createElement("div");
-      taskDiv.classList.add("taskDiv");
-
-      var taskIconDiv = document.createElement("div");
-      taskIconDiv.classList.add("taskIconDiv");
-
-      var taskCheckIcon = document.createElement("i");
-      taskCheckIcon.classList.add("fa");
-      taskCheckIcon.classList.add("fa-check");
-
-     
-      taskCheckIcon.addEventListener("click", function (event) {
-        utils.log(event.target.parentElement.parentElement.classList.add("completed"));
-      });
-
-
-      var taskUndoIcon = document.createElement("i");
-      taskUndoIcon.classList.add("fa");
-      taskUndoIcon.classList.add("fa-share");
-
-      taskUndoIcon.addEventListener("click", function (event) {
-        utils.log(event.target.parentElement.parentElement.classList.remove("completed"));
-      });
-
-      var taskDelIcon = document.createElement("i");
-      taskDelIcon.classList.add("fa");
-      taskDelIcon.classList.add("fa-bomb");
-
-      taskDelIcon.addEventListener("click", function (event) {
-        utils.log(event.target.parentElement.parentElement.remove());
-      });
-
-      var taskName = document.createElement("h4");
-      taskName.innerText = task.title;
-
-      var taskDescription = document.createElement("p");
-      taskDescription.innerText = task.description;
-
-      var taskDuePriority = document.createElement("p");
-      taskDuePriority.classList.add(`pri-${task.priority}`);
-      taskDuePriority.innerText = `${task.dueDate} | ${task.priority}`;
-
-      /* ICONS */
-      taskIconDiv.appendChild(taskCheckIcon);
-      taskIconDiv.appendChild(taskUndoIcon);
-      taskIconDiv.appendChild(taskDelIcon);
-
-      taskDiv.appendChild(taskIconDiv);
-      taskDiv.appendChild(taskName);
-      taskDiv.appendChild(taskDescription);
-      taskDiv.appendChild(taskDuePriority);
+      var taskDiv = utils.createSingleTaskDiv(task);
 
       taskContainer.appendChild(taskDiv);
     });
@@ -111,11 +73,21 @@ const utils = (() => {
     taskCheckIcon.classList.add("fa");
     taskCheckIcon.classList.add("fa-check");
 
-   
     taskCheckIcon.addEventListener("click", function (event) {
-      utils.log(event.target.parentElement.parentElement.classList.add("completed"));
+      utils.log(
+        event.target.parentElement.parentElement.classList.add("completed")
+      );
     });
 
+    var taskUndoIcon = document.createElement("i");
+    taskUndoIcon.classList.add("fa");
+    taskUndoIcon.classList.add("fa-share");
+
+    taskUndoIcon.addEventListener("click", function (event) {
+      utils.log(
+        event.target.parentElement.parentElement.classList.remove("completed")
+      );
+    });
 
     var taskDelIcon = document.createElement("i");
     taskDelIcon.classList.add("fa");
@@ -137,6 +109,7 @@ const utils = (() => {
 
     /* ICONS */
     taskIconDiv.appendChild(taskCheckIcon);
+    taskIconDiv.appendChild(taskUndoIcon);
     taskIconDiv.appendChild(taskDelIcon);
 
     taskDiv.appendChild(taskIconDiv);
@@ -146,29 +119,6 @@ const utils = (() => {
     taskDiv.appendChild(taskDuePriority);
 
     return taskDiv;
-  };
-
-  const displayProjects = function (projectList) {
-    /*projContainer.innerHTML = "";*/
-
-    projectList.forEach((project) => {
-      utils.log(`Displaying project ${project.title}`);
-
-      var projectDiv = document.createElement("div");
-      projectDiv.classList.add("projectDiv");
-      projectDiv.setAttribute("id", `${project.title}-projectDiv`);
-
-      var projName = document.createElement("h2");
-      projName.innerText = project.title;
-
-      projectDiv.appendChild(projName);
-
-      var taskContainer = utils.createTaskDiv(project, project.toDoList);
-
-      projectDiv.appendChild(taskContainer);
-
-      projContainer.appendChild(projectDiv);
-    });
   };
 
   const displaySingleProject = function (project) {
@@ -185,7 +135,7 @@ const utils = (() => {
 
     projectDiv.appendChild(projName);
 
-    var taskContainer = utils.createTaskDiv(project, project.toDoList);
+    var taskContainer = utils.createTaskContainer(project, project.toDoList);
 
     projectDiv.appendChild(taskContainer);
 
@@ -249,14 +199,14 @@ const utils = (() => {
   };
 
   return {
+    randstr,
     displaySingleProject,
     addNewProject,
     createSingleTaskDiv,
     addTaskToProject,
     addButtonClicked,
     log,
-    displayProjects,
-    createTaskDiv,
+    createTaskContainer,
   };
 })();
 
@@ -295,4 +245,8 @@ exampleProj = new project("example", exampleTaskList);
 
 projectList.push(exampleProj);
 
-utils.displayProjects(projectList);
+projectList.forEach((project) => {
+  utils.log(`Displaying project ${project.title}`);
+
+  utils.displaySingleProject(project);
+});
