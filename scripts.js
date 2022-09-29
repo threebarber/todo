@@ -73,22 +73,18 @@ const utils = (() => {
     var taskCheckIcon = document.createElement("i");
     taskCheckIcon.classList.add("fa");
     taskCheckIcon.classList.add("fa-check");
-
-    taskCheckIcon.addEventListener("click", function (event) {
-      utils.log(
-        event.target.parentElement.parentElement.classList.add("completed")
-      );
-    });
+    
+    taskCheckIcon.onclick = function(){
+        document.getElementById(task.taskID).classList.add("completed");
+    }
 
     var taskUndoIcon = document.createElement("i");
     taskUndoIcon.classList.add("fa");
     taskUndoIcon.classList.add("fa-share");
 
-    taskUndoIcon.addEventListener("click", function (event) {
-      utils.log(
-        event.target.parentElement.parentElement.classList.remove("completed")
-      );
-    });
+    taskUndoIcon.onclick = function() {
+        document.getElementById(task.taskID).classList.remove("completed");
+    }
 
     var taskEditIcon = document.createElement("i");
     taskEditIcon.classList.add("fa");
@@ -98,9 +94,9 @@ const utils = (() => {
     taskDelIcon.classList.add("fa");
     taskDelIcon.classList.add("fa-bomb");
 
-    taskDelIcon.addEventListener("click", function (event) {
-      utils.log(event.target.parentElement.parentElement.remove());
-    });
+    taskDelIcon.onclick = function() {
+        document.getElementById(task.taskID).remove();
+    }
 
     var taskName = document.createElement("h4");
     taskName.innerText = task.title;
@@ -115,7 +111,7 @@ const utils = (() => {
     /* ICONS */
     taskIconDiv.appendChild(taskCheckIcon);
     taskIconDiv.appendChild(taskUndoIcon);
-    taskIconDiv.appendChild(taskEditIcon);
+    taskIconDiv.appendChild(taskEditIcon)
     taskIconDiv.appendChild(taskDelIcon);
 
     taskDiv.appendChild(taskIconDiv);
