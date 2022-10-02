@@ -46,6 +46,38 @@
     font-size:medium;
 
 }
+
+.editFormPopup {
+    display:none;
+    z-index: 9;
+    position:fixed;
+    margin:auto;
+}
+
+.editFormContainer {
+    display:flex;
+    background-color: #f2f2f2;
+    border:solid #d9d9d9;
+    gap:8px;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    padding:20px;
+}
+
+.editButtonDiv{
+    display:flex;
+    justify-content: space-evenly;
+    gap:10px;
+}
+
+.editFormContainer input, label, textarea, button, select{
+    font-size:medium;
+}
+
+#cancelButton {
+    color:red;
+}
   
   .mainGridArea { 
     

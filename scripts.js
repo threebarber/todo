@@ -1,10 +1,17 @@
 const date = new Date();
 const projectList = [];
 const projContainer = document.querySelector(".projectsContainer");
+const popUp = document.querySelector(".editFormPopup");
 
 document.querySelector("#addButton").addEventListener("click", function () {
   utils.addButtonClicked();
 });
+
+
+  document.querySelector("#cancelButton").addEventListener("click", function () {
+    popUp.style.display = "none";
+  });
+  
 
 const task = function (
   title,
@@ -65,7 +72,7 @@ const utils = (() => {
   const createSingleTaskDiv = function (task) {
     var taskDiv = document.createElement("div");
     taskDiv.classList.add("taskDiv");
-    taskDiv.setAttribute("id",task.taskID);
+    taskDiv.setAttribute("id", task.taskID);
 
     var taskIconDiv = document.createElement("div");
     taskIconDiv.classList.add("taskIconDiv");
@@ -73,30 +80,34 @@ const utils = (() => {
     var taskCheckIcon = document.createElement("i");
     taskCheckIcon.classList.add("fa");
     taskCheckIcon.classList.add("fa-check");
-    
-    taskCheckIcon.onclick = function(){
-        document.getElementById(task.taskID).classList.add("completed");
-    }
+
+    taskCheckIcon.onclick = function () {
+      document.getElementById(task.taskID).classList.add("completed");
+    };
 
     var taskUndoIcon = document.createElement("i");
     taskUndoIcon.classList.add("fa");
     taskUndoIcon.classList.add("fa-share");
 
-    taskUndoIcon.onclick = function() {
-        document.getElementById(task.taskID).classList.remove("completed");
-    }
+    taskUndoIcon.onclick = function () {
+      document.getElementById(task.taskID).classList.remove("completed");
+    };
 
     var taskEditIcon = document.createElement("i");
     taskEditIcon.classList.add("fa");
     taskEditIcon.classList.add("fa-pen");
 
+    taskEditIcon.onclick = function () {
+      utils.displayEditForm(task);
+    };
+
     var taskDelIcon = document.createElement("i");
     taskDelIcon.classList.add("fa");
     taskDelIcon.classList.add("fa-bomb");
 
-    taskDelIcon.onclick = function() {
-        document.getElementById(task.taskID).remove();
-    }
+    taskDelIcon.onclick = function () {
+      document.getElementById(task.taskID).remove();
+    };
 
     var taskName = document.createElement("h4");
     taskName.innerText = task.title;
@@ -111,7 +122,7 @@ const utils = (() => {
     /* ICONS */
     taskIconDiv.appendChild(taskCheckIcon);
     taskIconDiv.appendChild(taskUndoIcon);
-    taskIconDiv.appendChild(taskEditIcon)
+    taskIconDiv.appendChild(taskEditIcon);
     taskIconDiv.appendChild(taskDelIcon);
 
     taskDiv.appendChild(taskIconDiv);
@@ -162,9 +173,7 @@ const utils = (() => {
     );
 
     if (projectList.find((p) => p.title === projectName) != undefined) {
-      utils.log(
-        `project ${projectName} already exists, adding task to selected project`
-      );
+      utils.log(`project ${projectName} already exists, adding task to selected project`);
       utils.addTaskToProject(newTask);
     } else {
       utils.log(`creating new project: ${projectName}`);
@@ -184,6 +193,8 @@ const utils = (() => {
     let newTaskDiv = utils.createSingleTaskDiv(newTask);
 
     existingTaskContainer.appendChild(newTaskDiv);
+
+    utils.log(`Current tasks for project ${project.title}: ${project.toDoList.length} - Current Total Projects: ${projectList.length} `);
   };
 
   const addNewProject = function (newTask) {
@@ -197,10 +208,26 @@ const utils = (() => {
 
     utils.log(`created new project ${newProj.title}`);
 
+    utils.log(`Current tasks for project ${newProj.title}: ${newProj.toDoList.length} - Current Total Projects: ${newProj.length} `);
+
+
     displaySingleProject(newProj);
   };
 
+  const displayEditForm = function (task) {
+    document
+      .querySelector("#editButton")
+      .setAttribute("data-task", task.taskID);
+
+      document.querySelector("#editButton").setAttribute("data-project", task.project);
+        
+      popUp.style.display = "flex";
+
+      
+  };
+
   return {
+    displayEditForm,
     randstr,
     displaySingleProject,
     addNewProject,

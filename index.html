@@ -33,54 +33,118 @@
 
       <div class="sidebarGridArea">
         <div class="createTaskFormDiv">
-          
-            <p>Add Task</p>
+          <p>Add Task</p>
 
-            <label for="taskNameInput">Task name:</label>
-            <input type="text" id="taskNameInput" name="taskNameInput" />
+          <label for="taskNameInput">Task name:</label>
+          <input type="text" id="taskNameInput" name="taskNameInput" />
 
-            <label for="projectInput">Project:</label>
-            <input type="text" id="projectInput" name="projectInput" value="example" />
+          <label for="projectInput">Project:</label>
+          <input
+            type="text"
+            id="projectInput"
+            name="projectInput"
+            value="example"
+          />
 
+          <label for="taskDescriptionInput">Description:</label>
+          <textarea
+            rows="4"
+            cols="50"
+            id="taskDescriptionInput"
+            name="taskDescriptionInput"
+          >
+          </textarea>
 
-            <label for="taskDescriptionInput">Description:</label>
-            <textarea
-              rows="4"
-              cols="50"
-              id="taskDescriptionInput"
-              name="taskDescriptionInput"
-            >
-            </textarea>
+          <label for="taskDateInput">Due Date:</label>
+          <input
+            value="2022-09-31"
+            min="2022-09-05"
+            max="2023-12-31"
+            type="date"
+            id="taskDateInput"
+            name="taskDateInput"
+          />
 
-            <label for="taskDateInput">Due Date:</label>
-            <input
-              value="2022-09-31"
-              min="2022-09-05"
-              max="2023-12-31"
-              type="date"
-              id="taskDateInput"
-              name="taskDateInput"
-            />
+          <br />
 
-            <br>
+          <label for="taskPriorityInput">Priority:</label>
 
-            <label for="taskPriorityInput">Priority:</label>
+          <select name="taskPriorityInput" id="taskPriorityInput">
+            <option value="normal">Normal</option>
+            <option value="low">Low</option>
+            <option value="high">High</option>
+          </select>
 
-            <select name="taskPriorityInput" id="taskPriorityInput">
-              <option value="normal">Normal</option>
-              <option value="low">Low</option>
-              <option value="high">High</option>
-            </select>
-
-            <br>
-            <button id="addButton" type="submit">Add Task</button>
-
-          
+          <br />
+          <button id="addButton" type="submit">Add Task</button>
         </div>
       </div>
 
       <div class="mainGridArea">
-        <div class="projectsContainer"></div>
+        <div class="projectsContainer">
+          <div class="editFormPopup">
+            <div class="editFormContainer">
+              <p>Edit Task</p>
+
+              <label for="editTaskNameInput">Task name:</label>
+              <input
+                type="text"
+                id="editTaskNameInput"
+                name="editTaskNameInput"
+              />
+
+              <!--  <label for="projectInput">Project:</label>
+          <input
+            type="text"
+            id="projectInput"
+            name="projectInput"
+            value="example"
+          />
+
+          -->
+
+              <label for="editTaskDescriptionInput">Description:</label>
+              <textarea
+                rows="4"
+                cols="50"
+                id="editTaskDescriptionInput"
+                name="editTaskDescriptionInput"
+              >
+              </textarea>
+
+              <label for="editTaskDateInput">Due Date:</label>
+              <input
+                value="2022-09-31"
+                min="2022-09-05"
+                max="2023-12-31"
+                type="date"
+                id="editTaskDateInput"
+                name="editTaskDateInput"
+              />
+
+              <br />
+
+              <label for="editTaskPriorityInput">Priority:</label>
+
+              <select name="editTaskPriorityInput" id="editTaskPriorityInput">
+                <option value="normal">Normal</option>
+                <option value="low">Low</option>
+                <option value="high">High</option>
+              </select>
+
+              <br />
+
+              <div class="editButtonDiv">
+                <button  id="editButton" type="submit">
+                  Edit Task
+                </button>
+                <button id="cancelButton" type="submit">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
