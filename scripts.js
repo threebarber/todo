@@ -223,10 +223,23 @@ const utils = (() => {
         
       popUp.style.display = "flex";
 
-      
+
+      utils.populateEditForm(task);
   };
 
+
+  const populateEditForm = function (task) {
+
+    document.querySelector("#editTaskNameInput").value = task.title;
+    document.querySelector("#editTaskDescriptionInput").value = task.description;
+    document.querySelector("#editTaskDateInput").value = task.dueDate;
+    document.querySelector("#editTaskDateInput").setAttribute("placeholder", task.dueDate);
+    document.querySelector("#editTaskPriorityInput").value = task.priority;
+    document.querySelector("#editTaskHeading").innerText = `Editing task: ${task.title} from project: ${task.project}`;
+  }
+
   return {
+    populateEditForm,
     displayEditForm,
     randstr,
     displaySingleProject,
