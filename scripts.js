@@ -7,10 +7,22 @@ document.querySelector("#addButton").addEventListener("click", function () {
   utils.addButtonClicked();
 });
 
-
   document.querySelector("#cancelButton").addEventListener("click", function () {
     popUp.style.display = "none";
   });
+
+document.querySelector("#editButton").addEventListener("click", function (event) {
+
+    
+    let taskID = event.target.getAttribute("data-task");
+    let projectID = event.target.getAttribute("data-project");
+
+
+    utils.log(`Edit button clicked for task id: ${taskID} project id: ${projectID}`);
+
+    utils.editTask(taskID,projectID);
+
+});
   
 
 const task = function (
@@ -18,7 +30,7 @@ const task = function (
   description,
   dueDate,
   priority,
-  project = "example",
+  project = "",
   taskID = ""
 ) {
   this.title = title;
@@ -36,13 +48,14 @@ const task = function (
 const project = function (title, toDoList, projectID = "") {
   this.title = title.toLowerCase();
   this.toDoList = toDoList;
-  this.projectID = projectID;
+  /*this.projectID = projectID;*/
+
+  this.projectID = utils.randstr("project-");
 
   this.addToList = function () {
     projectList.push(this);
   };
 
-  this.projectID = utils.randstr("project-");
   utils.log(`Created project: ${this.title} ID: ${this.projectID}`);
 };
 
@@ -141,7 +154,7 @@ const utils = (() => {
 
     var projectDiv = document.createElement("div");
     projectDiv.classList.add("projectDiv");
-    projectDiv.setAttribute("id", `${project.title}-projectDiv`);
+    projectDiv.setAttribute("id", project.projectID);
 
     var projName = document.createElement("h2");
     projName.innerText = project.title;
@@ -206,7 +219,7 @@ const utils = (() => {
 
     projectList.push(newProj);
 
-    utils.log(`created new project ${newProj.title}`);
+    utils.log(`created new project ${newProj.title} - project ID: ${newProj.projectID}`);
 
     utils.log(`Current tasks for project ${newProj.title}: ${newProj.toDoList.length} - Current Total Projects: ${newProj.length} `);
 
@@ -219,7 +232,9 @@ const utils = (() => {
       .querySelector("#editButton")
       .setAttribute("data-task", task.taskID);
 
-      document.querySelector("#editButton").setAttribute("data-project", task.project);
+      let projectID = projectList.find((p) => p.title == task.project).projectID;
+
+      document.querySelector("#editButton").setAttribute("data-project", projectID);
         
       popUp.style.display = "flex";
 
@@ -238,7 +253,44 @@ const utils = (() => {
     document.querySelector("#editTaskHeading").innerText = `Editing task: ${task.title} from project: ${task.project}`;
   }
 
+
+  const editTask = function (taskID, projectID) {
+
+    var oldTaskDiv = document.querySelector(`#${taskID}`);
+
+    /*get inputs from pop up*/
+
+    let taskName = document.querySelector("#editTaskNameInput").value;
+    let taskDescription = document.querySelector("#editTaskDescriptionInput").value;
+    let taskDate = document.querySelector("#editTaskDateInput").value;
+    let taskPriority = document.querySelector("#editTaskPriorityInput").value;
+
+    let taskProject = projectList.find((p) => p.projectID == projectID)
+
+    utils.log(`Found matching project: ${taskProject.title}`);
+
+    const newTask = new task(
+        taskName,
+        taskDescription,
+        taskDate,
+        taskPriority,
+        taskProject.title
+      );
+    
+
+    let newTaskDiv = utils.createSingleTaskDiv(newTask); 
+    
+    oldTaskDiv.replaceWith(newTaskDiv);
+
+    utils.log(newTaskDiv.innerHTML);
+
+    popUp.style.display = "none";
+
+
+  }
+
   return {
+    editTask,
     populateEditForm,
     displayEditForm,
     randstr,
