@@ -250,6 +250,8 @@ const utils = (() => {
         
       popUp.style.display = "flex";
 
+      popUp.scrollIntoView();
+
 
       utils.populateEditForm(task);
   };

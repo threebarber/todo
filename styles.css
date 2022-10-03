@@ -50,7 +50,7 @@
 .editFormPopup {
     display:none;
     z-index: 9;
-    position:fixed;
+    position:absolute;
     top:20vh;
     left:47vw;
 }
