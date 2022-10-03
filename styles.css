@@ -50,7 +50,8 @@
     display:none;
     z-index: 9;
     position:fixed;
-    margin:auto;
+    top:20vh;
+    left:40vw;
 }
 
 .editFormContainer {
