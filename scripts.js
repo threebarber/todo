@@ -157,10 +157,21 @@ const utils = (() => {
     projectDiv.classList.add("projectDiv");
     projectDiv.setAttribute("id", project.projectID);
 
+    var projIcon = document.createElement("i");
+    projIcon.classList.add("fa");
+    projIcon.classList.add("fa-clipboard");
+
     var projName = document.createElement("h2");
     projName.innerText = project.title;
 
-    projectDiv.appendChild(projName);
+    var projectTitleDiv = document.createElement("div");
+    projectTitleDiv.classList.add("projTitleDiv");
+
+
+    projectTitleDiv.appendChild(projIcon);
+    projectTitleDiv.appendChild(projName);
+
+    projectDiv.appendChild(projectTitleDiv);
 
     var taskContainer = utils.createTaskContainer(project, project.toDoList);
 
