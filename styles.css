@@ -49,10 +49,14 @@
 
 .editFormPopup {
     display:none;
+    justify-content: center;
+    align-items: center;
     z-index: 9;
     position:absolute;
     top:20vh;
     left:47vw;
+
+    
 }
 
 .editFormContainer {
