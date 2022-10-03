@@ -20,11 +20,9 @@
 
 .headerDiv {
     display:flex;
+    align-items: center;
 }
 
-.titleGridArea h2{
-    padding-left: 10vw;
-}
   
   .sidebarGridArea { 
     
