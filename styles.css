@@ -38,7 +38,8 @@
     align-items: center;
     flex-direction: column;
     border-radius: 5px;
-    border:solid #d9d9d9;
+    border:solid #BAA5FF;
+    background-color: #FFFCFF;
 }
 
 .createTaskFormDiv input, label, textarea, button, select{
@@ -51,13 +52,13 @@
     z-index: 9;
     position:fixed;
     top:20vh;
-    left:40vw;
+    left:47vw;
 }
 
 .editFormContainer {
     display:flex;
     background-color: #f2f2f2;
-    border:solid #d9d9d9;
+    border:solid #BAA5FF;
     gap:8px;
     align-items: center;
     flex-direction: column;
@@ -82,7 +83,7 @@
   .mainGridArea { 
     
     grid-area: mainGridArea; 
-    border:solid #d9d9d9;
+    border:solid #BAA5FF;
     border-radius: 5px;
     }
   
@@ -95,7 +96,7 @@
  .projectDiv {
     display:flex;
     flex-direction: column;
-    border:solid #d9d9d9;
+    border:solid #BAA5FF;
     border-radius: 10px;
     margin:10px;
     min-width: 12vw;
@@ -139,9 +140,13 @@
     flex-direction: column;
  padding: 10px;
  border-radius: 6px;
- background-color: #d9d9d9;
+ background-color: #BAA5FF;
  align-items: center;
  justify-content: center;
+}
+
+.taskDiv div, .taskDiv h4,.taskDiv p, .taskDiv i{
+    color:#F5F1ED;
 }
 
  
@@ -164,7 +169,7 @@
 
 input, textarea, select {
     border-radius: 5px;
-    border:solid #d9d9d9;
+    border:solid #BAA5FF;
 }
 
   html{
@@ -183,3 +188,5 @@ input, textarea, select {
     letter-spacing: 0em;
 
   }
+
+  
