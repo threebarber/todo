@@ -8,7 +8,6 @@
       "sidebarGridArea mainGridArea";
 
 
-      border:white dashed 5px;
       border-radius: 10px;
   }
   
@@ -31,7 +30,7 @@
     
     grid-area: sidebarGridArea;     
 
-    border:dashed green;
+    /*border:dashed green;*/
 }
 
 
@@ -40,6 +39,8 @@
     gap:8px;
     align-items: center;
     flex-direction: column;
+    border-radius: 5px;
+    border:solid #d9d9d9;
 }
 
 .createTaskFormDiv input, label, textarea, button, select{
@@ -82,8 +83,8 @@
   .mainGridArea { 
     
     grid-area: mainGridArea; 
-
-    border:dashed green;
+    border:solid #d9d9d9;
+    border-radius: 5px;
     }
   
  .projectsContainer {
@@ -110,9 +111,8 @@
     display:flex;
     flex-direction: column;
     margin:10px;
-    background-color: #d9d9d9;
     border-radius: 5px;
-    
+    gap:10px;
  }
 
 
@@ -125,6 +125,8 @@
 
  .taskDiv{
  padding: 5px;
+ border-radius: 6px;
+ background-color: #d9d9d9;
 }
 
  
@@ -155,7 +157,7 @@ input, textarea, select {
     margin-bottom: 10vh;
     margin-left: 10vw;
     margin-right:10vw;
-    background-color: #f2f2f2;
+    /*background-color: #f2f2f2;*/
   }
 
 * {

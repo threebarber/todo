@@ -82,7 +82,7 @@ const utils = (() => {
     return taskContainer;
   };
 
-  const createSingleTaskDiv = function (task) {
+  const createSingleTaskDiv = function (task,project) {
     var taskDiv = document.createElement("div");
     taskDiv.classList.add("taskDiv");
     taskDiv.setAttribute("id", task.taskID);
@@ -120,6 +120,7 @@ const utils = (() => {
 
     taskDelIcon.onclick = function () {
       document.getElementById(task.taskID).remove();
+      
     };
 
     var taskName = document.createElement("h4");
@@ -203,7 +204,7 @@ const utils = (() => {
       `#${project.title}-taskDiv`
     );
 
-    let newTaskDiv = utils.createSingleTaskDiv(newTask);
+    let newTaskDiv = utils.createSingleTaskDiv(newTask, project);
 
     existingTaskContainer.appendChild(newTaskDiv);
 
@@ -278,11 +279,9 @@ const utils = (() => {
       );
     
 
-    let newTaskDiv = utils.createSingleTaskDiv(newTask); 
+    let newTaskDiv = utils.createSingleTaskDiv(newTask,taskProject); 
     
     oldTaskDiv.replaceWith(newTaskDiv);
-
-    utils.log(newTaskDiv.innerHTML);
 
     popUp.style.display = "none";
 
