@@ -47,6 +47,11 @@
 
 }
 
+
+.createTaskFormDiv input:focus, textarea:focus, select:focus{
+    outline: solid #9792E3;
+}
+
 .editFormPopup {
     display:none;
     justify-content: center;
@@ -78,6 +83,11 @@
 
 .editFormContainer input, label, textarea, button, select{
     font-size:medium;
+}
+
+
+.editFormContainer input:focus, textarea:focus, select:focus{
+    outline: solid #9792E3;
 }
 
 #cancelButton {
