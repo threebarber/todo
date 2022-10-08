@@ -151,12 +151,14 @@
 
  .taskDiv{
     display: flex;
+    max-width: 25vw;
     flex-direction: column;
     padding: 10px;
     border-radius: 6px;
     background-color: #BAA5FF;
     align-items: center;
     justify-content: center;
+    word-break: break-word;
 
     animation: append-animate .3s linear;
 
