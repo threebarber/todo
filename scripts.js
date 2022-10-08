@@ -117,7 +117,7 @@ const utils = (() => {
 
     var taskDelIcon = document.createElement("i");
     taskDelIcon.classList.add("fa");
-    taskDelIcon.classList.add("fa-bomb");
+    taskDelIcon.classList.add("fa-trash");
 
     taskDelIcon.onclick = function () {
       document.getElementById(task.taskID).remove();

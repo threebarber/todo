@@ -152,13 +152,13 @@
  .taskDiv{
     display: flex;
     flex-direction: column;
- padding: 10px;
- border-radius: 6px;
- background-color: #BAA5FF;
- align-items: center;
- justify-content: center;
+    padding: 10px;
+    border-radius: 6px;
+    background-color: #BAA5FF;
+    align-items: center;
+    justify-content: center;
 
- animation: append-animate .3s linear;
+    animation: append-animate .3s linear;
 
 }
 
