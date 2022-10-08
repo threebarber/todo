@@ -51,6 +51,10 @@
 .createTaskFormDiv input:focus, textarea:focus, select:focus{
     outline: solid #9792E3;
 }
+.createTaskFormDiv input:hover, textarea:hover, select:hover{
+    outline: solid thin #9792E3;
+    cursor:pointer;
+}
 
 .editFormPopup {
     display:none;
@@ -88,6 +92,10 @@
 
 .editFormContainer input:focus, textarea:focus, select:focus{
     outline: solid #9792E3;
+}
+.editFormContainer input:hover, textarea:hover, select:hover{
+    outline: solid thin #9792E3;
+    cursor:pointer;
 }
 
 #cancelButton {
