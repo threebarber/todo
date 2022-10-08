@@ -23,7 +23,8 @@ document.querySelector("#editButton").addEventListener("click", function (event)
     utils.editTask(taskID,projectID);
 
 });
-  
+
+
 
 const task = function (
   title,
