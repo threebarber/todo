@@ -149,6 +149,10 @@
     gap:10px;
 }
 
+.taskIconDiv i:hover{
+    transform: scale(1.5);
+}
+
  .taskDiv{
     display: flex;
     max-width: 25vw;
